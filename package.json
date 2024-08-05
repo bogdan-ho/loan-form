@@ -16,6 +16,7 @@
     "@emotion/react": "^11.13.0",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.6",
+    "axios": "^1.7.3",
     "effector": "^23.2.2",
     "effector-react": "^23.2.1",
     "prettier": "^3.3.3",
@@ -23,6 +24,7 @@
     "react-dom": "^18.3.1",
     "react-error-boundary": "^4.0.13",
     "react-hook-form": "^7.52.2",
+    "react-imask": "^7.6.1",
     "react-router-dom": "^6.26.0"
   },
   "devDependencies": {
