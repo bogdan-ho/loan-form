@@ -22,6 +22,8 @@ export const ErrorFallback = () => {
       style={{
         display: 'flex',
         flexDirection: 'column',
+        width: '100%',
+        height: '100%',
       }}
     >
       <h1>Что-то пошло не так</h1>
