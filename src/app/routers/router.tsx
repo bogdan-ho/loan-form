@@ -4,10 +4,11 @@ import { ErrorFallback } from '../../shared/ui/ErrorFallback.tsx'
 import { PersonalDataPage } from '../../pages/PersonalDataPage'
 import { AddressAndJobPage } from '../../pages/AddressAndJobPage'
 import { LoanParametersPage } from '../../pages/LoanParametersPage'
+import { routes } from '../../shared/lib/routes.ts'
 
 export const router = createBrowserRouter([
   {
-    path: '/',
+    path: routes.main,
     element: (
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <PersonalDataPage />
@@ -15,7 +16,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: '/address-and-job',
+    path: routes.addressAndJob,
     element: (
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <AddressAndJobPage />
@@ -23,7 +24,7 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: '/loan-parameters',
+    path: routes.loanParameters,
     element: (
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <LoanParametersPage />

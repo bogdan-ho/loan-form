@@ -16,6 +16,8 @@ import {
   getFieldErrorMessage,
   isFieldError,
 } from '../../../shared/lib/formUtils.ts'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../../../shared/lib/routes.ts'
 
 interface FormData {
   phone: string
@@ -25,6 +27,8 @@ interface FormData {
 }
 
 export const PersonalDataForm = () => {
+  const navigate = useNavigate()
+
   const methods = useForm<FormData>()
   const {
     control,
@@ -35,6 +39,7 @@ export const PersonalDataForm = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data)
+    navigate(routes.addressAndJob)
   }
 
   console.log(errors, 'errors')

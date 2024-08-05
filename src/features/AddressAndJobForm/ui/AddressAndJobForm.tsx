@@ -15,12 +15,16 @@ import {
   getFieldErrorMessage,
   isFieldError,
 } from '../../../shared/lib/formUtils.ts'
+import { useNavigate } from 'react-router-dom'
+import { routes } from '../../../shared/lib/routes.ts'
 
 interface FormData {
   jobPlace: string
   address: string
 }
 export const AddressAndJobForm = () => {
+  const navigate = useNavigate()
+
   const methods = useForm<FormData>()
   const {
     control,
@@ -31,6 +35,11 @@ export const AddressAndJobForm = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data)
+    navigate(routes.loanParameters)
+  }
+
+  const handleGoToPreviousPage = () => {
+    navigate(-1)
   }
 
   console.log(errors, 'errors')
@@ -95,7 +104,12 @@ export const AddressAndJobForm = () => {
           />
 
           <Box display="flex" gap={2}>
-            <Button type="submit" variant="outlined" size="large" fullWidth>
+            <Button
+              variant="outlined"
+              size="large"
+              fullWidth
+              onClick={handleGoToPreviousPage}
+            >
               Назад
             </Button>
             <Button type="submit" variant="contained" size="large" fullWidth>
