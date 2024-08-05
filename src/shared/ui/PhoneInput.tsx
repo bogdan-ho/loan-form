@@ -53,6 +53,14 @@ export const PhoneInput = (props: TextFieldProps) => {
           value: true,
           message: 'Обязательное поле',
         },
+        minLength: {
+          value: 10,
+          message: 'Введите номер в формате 0(123) 456 789',
+        },
+        pattern: {
+          value: /^0/,
+          message: 'Номер телефона должен начинаться с 0',
+        },
       })}
       error={isFieldError(errors, 'phone')}
       helperText={getFieldErrorMessage(errors, 'phone')}
