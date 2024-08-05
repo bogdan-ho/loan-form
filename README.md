@@ -39,13 +39,13 @@
 1. Клонируйте репозиторий:
 
 ```
-git clone https://github.com/bogdan-ho/loan-from.git
+git clone https://github.com/bogdan-ho/loan-form.git
 ```
 
 2. Перейдите в директорию проекта:
 
 ```
-cd loan-from
+cd loan-form
 ```
 
 3. Установите зависимости:
