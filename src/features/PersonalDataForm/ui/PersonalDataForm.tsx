@@ -18,6 +18,11 @@ import {
 } from '../../../shared/lib/formUtils.ts'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '../../../shared/lib/routes.ts'
+import {
+  $userLoanInfoStore,
+  updateUserLoanInfo,
+} from '../../../entities/User/model/userLoanInfoStore.ts'
+import { useUnit } from 'effector-react'
 
 interface FormData {
   phone: string
@@ -29,7 +34,18 @@ interface FormData {
 export const PersonalDataForm = () => {
   const navigate = useNavigate()
 
-  const methods = useForm<FormData>()
+  const userLoanInfoStore = useUnit($userLoanInfoStore)
+  console.log(userLoanInfoStore, 'userLoanInfoStore')
+
+  const { phone, firstName, lastName, gender } = userLoanInfoStore
+  const defaultValues: FormData = {
+    phone,
+    firstName,
+    lastName,
+    gender,
+  }
+
+  const methods = useForm<FormData>({ defaultValues })
   const {
     control,
     handleSubmit,
@@ -39,6 +55,7 @@ export const PersonalDataForm = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data)
+    updateUserLoanInfo(data)
     navigate(routes.addressAndJob)
   }
 

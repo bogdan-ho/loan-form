@@ -17,6 +17,11 @@ import {
 } from '../../../shared/lib/formUtils.ts'
 import { useNavigate } from 'react-router-dom'
 import { routes } from '../../../shared/lib/routes.ts'
+import { useUnit } from 'effector-react'
+import {
+  $userLoanInfoStore,
+  updateUserLoanInfo,
+} from '../../../entities/User/model/userLoanInfoStore.ts'
 
 interface FormData {
   jobPlace: string
@@ -25,20 +30,32 @@ interface FormData {
 export const AddressAndJobForm = () => {
   const navigate = useNavigate()
 
-  const methods = useForm<FormData>()
+  const userLoanInfoStore = useUnit($userLoanInfoStore)
+  console.log(userLoanInfoStore, 'userLoanInfoStore')
+  const { jobPlace, address } = userLoanInfoStore
+  const defaultValues: FormData = {
+    jobPlace,
+    address,
+  }
+
+  const methods = useForm<FormData>({ defaultValues })
   const {
     control,
     handleSubmit,
     register,
+    getValues,
     formState: { errors },
   } = methods
 
   const onSubmit = (data: FormData) => {
     console.log(data)
+    updateUserLoanInfo(data)
     navigate(routes.loanParameters)
   }
 
   const handleGoToPreviousPage = () => {
+    const currentFormData = getValues()
+    updateUserLoanInfo(currentFormData)
     navigate(-1)
   }
 

@@ -1,17 +1,25 @@
 import { Controller, FormProvider, useForm } from 'react-hook-form'
 import { Box, Button, Paper, Slider, Typography } from '@mui/material'
+import { useUnit } from 'effector-react'
+import {
+  $userLoanInfoStore,
+  updateUserLoanInfo,
+} from '../../../entities/User/model/userLoanInfoStore.ts'
 
 interface FormData {
   loanAmount: number
   loanDuration: number
 }
 export const LoanParametersForm = () => {
-  const methods = useForm<FormData>({
-    defaultValues: {
-      loanAmount: 200,
-      loanDuration: 10,
-    },
-  })
+  const userLoanInfoStore = useUnit($userLoanInfoStore)
+  console.log(userLoanInfoStore, 'userLoanInfoStore')
+  const { loanAmount, loanDuration } = userLoanInfoStore
+  const defaultValues: FormData = {
+    loanAmount,
+    loanDuration,
+  }
+
+  const methods = useForm<FormData>({ defaultValues })
   const {
     control,
     handleSubmit,
@@ -20,6 +28,7 @@ export const LoanParametersForm = () => {
 
   const onSubmit = (data: FormData) => {
     console.log(data)
+    updateUserLoanInfo(data)
   }
 
   console.log(errors, 'errors')
