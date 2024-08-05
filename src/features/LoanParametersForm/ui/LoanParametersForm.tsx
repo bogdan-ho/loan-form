@@ -28,7 +28,6 @@ export const LoanParametersForm = () => {
   } = methods
 
   const onSubmit = (data: FormData) => {
-    console.log(data)
     updateUserLoanInfo(data)
 
     applyForLoanFx({ ...userLoanInfoStore, ...data })

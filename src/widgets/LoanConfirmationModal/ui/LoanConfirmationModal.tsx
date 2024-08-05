@@ -18,7 +18,6 @@ import {
 export const LoanConfirmationModal = () => {
   const loanConfirmationModalStore = useUnit($loanConfirmationModalStore)
   const userLoanInfoStore = useUnit($userLoanInfoStore)
-  console.log(userLoanInfoStore, 'userLoanInfoStore')
   const { loanAmount, loanDuration, firstName, lastName } = userLoanInfoStore
 
   const handleClose = () => {

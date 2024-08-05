@@ -53,10 +53,6 @@ export const $userLoanInfoStore = createStore<UserLoanInfoState>(initialState)
     return state
   })
 
-$userLoanInfoStore.watch((state) =>
-  console.log(state, '$userLoanInfoStore state')
-)
-
 sample({
   clock: applyForLoanFx.done,
   target: openLoanConfirmationModal,

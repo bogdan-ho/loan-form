@@ -54,12 +54,11 @@ export const PersonalDataForm = () => {
   } = methods
 
   const onSubmit = (data: FormData) => {
-    console.log(data)
     updateUserLoanInfo(data)
+
     navigate(routes.addressAndJob)
   }
 
-  console.log(errors, 'errors')
   return (
     <Paper
       elevation={2}
