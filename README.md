@@ -1,30 +1,77 @@
-# React + TypeScript + Vite
+# Форма заявки на кредит
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Это одностраничное приложение (SPA), построенное с использованием React, TypeScript и различных библиотек, для создания формы заявки на кредит с тремя последовательными шагами.
 
-Currently, two official plugins are available:
+## Возможности
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Трехшаговая форма для сбора данных пользователя:
+    1. Личная информация
+    2. Адрес и место работы
+    3. Параметры кредита
+- Валидация форм с обработкой ошибок с помощью React Hook Form
+- Сохранение данных между формами с использованием Effector
+- Навигация между формами с помощью React Router
+- Финальное модальное окно подтверждения с деталями кредита
+- Обработка непредвиденных ошибок с помощью Error Boundary
+- Линтинг и форматирование кода с помощью ESLint и Prettier
 
-## Expanding the ESLint configuration
+## Используемые технологии
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- React Router
+- Effector
+- React Hook Form
+- React IMask
+- Material-UI
+- Axios
+- Vite
 
-- Configure the top-level `parserOptions` property like this:
+## Начало работы
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.app.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+### Требования
+
+- Node.js (версия 14 или выше)
+- npm (версия 6 или выше)
+
+### Установка
+
+1. Клонируйте репозиторий:
+
+```
+git clone https://github.com/bogdan-ho/loan-from.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+2. Перейдите в директорию проекта:
+
+```
+cd loan-from
+```
+
+3. Установите зависимости:
+
+```
+npm ci
+```
+
+### Запуск приложения
+
+1. Запустите сервер разработки:
+
+```
+npm run dev
+```
+
+2. Откройте веб-браузер и перейдите по адресу `http://localhost:5173`.
+
+## Использование
+
+1. Заполните первую форму с личной информацией.
+2. Нажмите кнопку "Далее" для перехода ко второй форме.
+3. Заполните информацию об адресе и месте работы.
+4. Нажмите кнопку "Далее" для перехода к третьей форме.
+5. Настройте сумму и срок кредита с помощью ползунков.
+6. Нажмите кнопку "Подать заявку" для отправки заявки на кредит.
+7. Появится модальное окно подтверждения с деталями вашего кредита.
+
+
