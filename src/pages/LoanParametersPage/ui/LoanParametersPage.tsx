@@ -1,6 +1,7 @@
 import useTitle from '../../../shared/lib/hooks/useTitle.tsx'
 import { Box } from '@mui/material'
 import { LoanParametersForm } from '../../../features/LoanParametersForm'
+import { LoanConfirmationModal } from '../../../widgets/LoanConfirmationModal'
 
 export const LoanParametersPage = () => {
   useTitle('Параметры займа')
@@ -13,6 +14,7 @@ export const LoanParametersPage = () => {
       height="100%"
     >
       <LoanParametersForm />
+      <LoanConfirmationModal />
     </Box>
   )
 }

@@ -21,7 +21,7 @@ import { useUnit } from 'effector-react'
 import {
   $userLoanInfoStore,
   updateUserLoanInfo,
-} from '../../../entities/User/model/userLoanInfoStore.ts'
+} from '../../../entities/UserLoanInfo'
 
 interface FormData {
   jobPlace: string
@@ -76,7 +76,9 @@ export const AddressAndJobForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormProvider {...methods}>
-          <Typography variant="h5">Адрес и место работы</Typography>
+          <Typography variant="h5" component="h1">
+            Адрес и место работы
+          </Typography>
 
           <FormControl fullWidth error={isFieldError(errors, 'jobPlace')}>
             <InputLabel id="jobPlaceSelectLabel">Место работы</InputLabel>

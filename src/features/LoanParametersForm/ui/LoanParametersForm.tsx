@@ -3,8 +3,9 @@ import { Box, Button, Paper, Slider, Typography } from '@mui/material'
 import { useUnit } from 'effector-react'
 import {
   $userLoanInfoStore,
+  applyForLoanFx,
   updateUserLoanInfo,
-} from '../../../entities/User/model/userLoanInfoStore.ts'
+} from '../../../entities/UserLoanInfo'
 
 interface FormData {
   loanAmount: number
@@ -29,6 +30,8 @@ export const LoanParametersForm = () => {
   const onSubmit = (data: FormData) => {
     console.log(data)
     updateUserLoanInfo(data)
+
+    applyForLoanFx({ ...userLoanInfoStore, ...data })
   }
 
   console.log(errors, 'errors')
@@ -48,7 +51,9 @@ export const LoanParametersForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormProvider {...methods}>
-          <Typography variant="h5">Параметры займа</Typography>
+          <Typography variant="h5" component="h1">
+            Параметры займа
+          </Typography>
 
           <Box>
             <Controller

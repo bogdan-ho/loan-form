@@ -21,7 +21,7 @@ import { routes } from '../../../shared/lib/routes.ts'
 import {
   $userLoanInfoStore,
   updateUserLoanInfo,
-} from '../../../entities/User/model/userLoanInfoStore.ts'
+} from '../../../entities/UserLoanInfo'
 import { useUnit } from 'effector-react'
 
 interface FormData {
@@ -76,7 +76,9 @@ export const PersonalDataForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <FormProvider {...methods}>
-          <Typography variant="h5">Личные данные</Typography>
+          <Typography variant="h5" component="h1">
+            Личные данные
+          </Typography>
           <PhoneInput variant="outlined" label="Номер телефона" />
 
           <TextField
