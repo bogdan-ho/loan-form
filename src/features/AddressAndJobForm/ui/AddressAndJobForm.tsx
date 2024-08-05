@@ -1,16 +1,5 @@
-import { Controller, FormProvider, useForm } from 'react-hook-form'
-import {
-  Box,
-  Button,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { FormProvider, useForm } from 'react-hook-form'
+import { Box, Button, Paper, TextField, Typography } from '@mui/material'
 import {
   getFieldErrorMessage,
   isFieldError,
@@ -22,6 +11,7 @@ import {
   $userLoanInfoStore,
   updateUserLoanInfo,
 } from '../../../entities/UserLoanInfo'
+import { JobPlaceTextField } from '../../../shared/ui/JobPlaceTextField'
 
 interface FormData {
   jobPlace: string
@@ -31,7 +21,6 @@ export const AddressAndJobForm = () => {
   const navigate = useNavigate()
 
   const userLoanInfoStore = useUnit($userLoanInfoStore)
-  console.log(userLoanInfoStore, 'userLoanInfoStore')
   const { jobPlace, address } = userLoanInfoStore
   const defaultValues: FormData = {
     jobPlace,
@@ -40,7 +29,6 @@ export const AddressAndJobForm = () => {
 
   const methods = useForm<FormData>({ defaultValues })
   const {
-    control,
     handleSubmit,
     register,
     getValues,
@@ -48,8 +36,8 @@ export const AddressAndJobForm = () => {
   } = methods
 
   const onSubmit = (data: FormData) => {
-    console.log(data)
     updateUserLoanInfo(data)
+
     navigate(routes.loanParameters)
   }
 
@@ -59,7 +47,6 @@ export const AddressAndJobForm = () => {
     navigate(-1)
   }
 
-  console.log(errors, 'errors')
   return (
     <Paper
       elevation={2}
@@ -80,34 +67,7 @@ export const AddressAndJobForm = () => {
             Адрес и место работы
           </Typography>
 
-          <FormControl fullWidth error={isFieldError(errors, 'jobPlace')}>
-            <InputLabel id="jobPlaceSelectLabel">Место работы</InputLabel>
-            <Controller
-              name="jobPlace"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: 'Обязательное поле',
-                },
-              }}
-              defaultValue=""
-              render={({ field }) => (
-                <Select
-                  {...field}
-                  labelId="jobPlaceSelectLabel"
-                  id="jobPlaceSelect"
-                  label="Место работы"
-                >
-                  <MenuItem value="male">Мужской</MenuItem>
-                  <MenuItem value="female">Женский</MenuItem>
-                </Select>
-              )}
-            />
-            <FormHelperText>
-              {getFieldErrorMessage(errors, 'jobPlace') ?? ''}
-            </FormHelperText>
-          </FormControl>
+          <JobPlaceTextField />
 
           <TextField
             variant="outlined"
