@@ -1,17 +1,8 @@
 import { createStore, createEvent, createEffect, sample } from 'effector'
-import axios, { AxiosError } from 'axios'
+import { AxiosError } from 'axios'
 import { openLoanConfirmationModal } from './loanConfirmationModalStore.ts'
-
-interface UserLoanInfoState {
-  phone: string
-  firstName: string
-  lastName: string
-  gender: string
-  jobPlace: string
-  address: string
-  loanAmount: number
-  loanDuration: number
-}
+import { ApplyForLoanResponse, UserLoanInfoState } from '../types/types.ts'
+import { userLoanInfoServices } from '../api/userLoanInfoServices.ts'
 
 const initialState: UserLoanInfoState = {
   phone: '',
@@ -32,11 +23,7 @@ export const applyForLoanFx = createEffect<
   { id: number },
   AxiosError
 >(async (data) => {
-  console.log('applyForLoanFx called with', data)
-
-  const response = await axios.post('https://dummyjson.com/products/add', {
-    title: data.firstName + ' ' + data.lastName,
-  })
+  const response = await userLoanInfoServices.applyForLoan(data)
 
   return response.data
 })

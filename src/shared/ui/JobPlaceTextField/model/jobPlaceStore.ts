@@ -1,17 +1,11 @@
 import { createEffect, createStore } from 'effector'
-import axios, { AxiosError } from 'axios'
-
-interface Product {
-  name: string
-  slug: string
-  url: string
-}
+import { AxiosError } from 'axios'
+import { Product } from '../types/types.ts'
+import { jobPlaceServices } from '../api/jobPlaceServices.ts'
 
 export const fetchJobPlacesFx = createEffect<void, Product[], AxiosError>(
   async () => {
-    const response = await axios.get(
-      'https://dummyjson.com/products/categories'
-    )
+    const response = await jobPlaceServices.getJobPlaces()
     return response.data
   }
 )
