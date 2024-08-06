@@ -35,7 +35,6 @@ export const PersonalDataForm = () => {
   const navigate = useNavigate()
 
   const userLoanInfoStore = useUnit($userLoanInfoStore)
-  console.log(userLoanInfoStore, 'userLoanInfoStore')
 
   const { phone, firstName, lastName, gender } = userLoanInfoStore
   const defaultValues: FormData = {

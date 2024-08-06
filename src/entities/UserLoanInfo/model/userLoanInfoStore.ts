@@ -18,9 +18,11 @@ const initialState: UserLoanInfoState = {
 export const updateUserLoanInfo =
   createEvent<Partial<UserLoanInfoState>>('updateUserLoanInfo')
 
+export const submitLoanForm = createEvent('submitLoanForm')
+
 export const applyForLoanFx = createEffect<
   UserLoanInfoState,
-  { id: number },
+  ApplyForLoanResponse,
   AxiosError
 >(async (data) => {
   const response = await userLoanInfoServices.applyForLoan(data)
@@ -32,13 +34,33 @@ export const $userLoanInfoStore = createStore<UserLoanInfoState>(initialState)
     ...state,
     ...data,
   }))
-  .on(applyForLoanFx.done, (_, { result }) => {
+  .on(applyForLoanFx.done, (state, { result }) => {
     console.log('Заявка на кредит успешно отправлена! ID:', result.id)
+    return state
   })
   .on(applyForLoanFx.fail, (state, error) => {
     console.error('Ошибка при отправке заявки на кредит:', error)
     return state
   })
+
+export const $isAllLoanFormsFilled = createStore<boolean>(false)
+
+sample({
+  clock: $userLoanInfoStore,
+  fn: (userLoanInfoStore) => {
+    return userLoanInfoStore
+      ? !Object.values(userLoanInfoStore).some((fieldValue) => !fieldValue)
+      : false
+  },
+  target: $isAllLoanFormsFilled,
+})
+
+sample({
+  clock: submitLoanForm,
+  source: $userLoanInfoStore,
+  fn: (userLoanInfoStore) => userLoanInfoStore,
+  target: applyForLoanFx,
+})
 
 sample({
   clock: applyForLoanFx.done,

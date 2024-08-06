@@ -3,8 +3,9 @@ import { Box, Button, Paper, Slider, Typography } from '@mui/material'
 import { useUnit } from 'effector-react'
 import {
   $userLoanInfoStore,
-  applyForLoanFx,
   updateUserLoanInfo,
+  $isAllLoanFormsFilled,
+  submitLoanForm,
 } from '../../../entities/UserLoanInfo'
 
 interface FormData {
@@ -13,7 +14,8 @@ interface FormData {
 }
 export const LoanParametersForm = () => {
   const userLoanInfoStore = useUnit($userLoanInfoStore)
-  console.log(userLoanInfoStore, 'userLoanInfoStore')
+  const isAllLoanFormsFilled = useUnit($isAllLoanFormsFilled)
+
   const { loanAmount, loanDuration } = userLoanInfoStore
   const defaultValues: FormData = {
     loanAmount,
@@ -21,19 +23,14 @@ export const LoanParametersForm = () => {
   }
 
   const methods = useForm<FormData>({ defaultValues })
-  const {
-    control,
-    handleSubmit,
-    formState: { errors },
-  } = methods
+  const { control, handleSubmit } = methods
 
   const onSubmit = (data: FormData) => {
     updateUserLoanInfo(data)
 
-    applyForLoanFx({ ...userLoanInfoStore, ...data })
+    submitLoanForm()
   }
 
-  console.log(errors, 'errors')
   return (
     <Paper
       elevation={2}
@@ -126,9 +123,23 @@ export const LoanParametersForm = () => {
             />
           </Box>
 
-          <Button type="submit" variant="contained" size="large">
-            Подать заявку
-          </Button>
+          <Box
+            title={
+              isAllLoanFormsFilled
+                ? ''
+                : 'Пожалуйста, заполните все обязательные поля во всех формах'
+            }
+          >
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
+              fullWidth
+              disabled={!isAllLoanFormsFilled}
+            >
+              Подать заявку
+            </Button>
+          </Box>
         </FormProvider>
       </Box>
     </Paper>
